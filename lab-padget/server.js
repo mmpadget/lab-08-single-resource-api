@@ -8,6 +8,7 @@ const debug = require('debug')('http:server');
 const PORT = process.env.PORT || 3000;
 
 const router = new Router();
+// call back to kickstart our server. alias exports to server so we can use elsewhere in the file.
 const server = module.exports = http.createServer(router.route());
 // Yesterday we wrote: (function(req, res)). See cowsay and see the callback.
 // We’re doing a switch and binding to the router so we have the routes GET…
@@ -22,13 +23,14 @@ const server = module.exports = http.createServer(router.route());
 // can use JSON.parse, JSON.stringify. objects. Also parse for Url strings.
 
 // TODO: GET request pass an ?id=<uuid> in the query string to retrieve a specific resource as json
+// Currently, the verb changes, but the noun doesn't change.
 router.get('/api/music', function(req, res) {
   debug('GET /api/music');
   if(req.url.query.id) {
-    storage.fetchItem('music', req.url.query.id)
-    .then(music => {
+    storage.fetchItem('music', req.url.query.id) // pass schema name and id.
+    .then(music => { // return promise.
       res.writeHead(200, {'Content-Type': 'application/json'});
-      res.write(JSON.stringify(music));
+      res.write(JSON.stringify(music)); // sending json as content type.
       res.end();
     })
     .catch(err => {
@@ -40,7 +42,7 @@ router.get('/api/music', function(req, res) {
     return;
   }
 
-  res.writeHead(400, {'Content-Type': 'text/plain'});
+  res.writeHead(400, {'Content-Type': 'text/plain'}); // if no id property. bad request b/c no id sent.
   res.write('bad request');
   res.end();
 });
@@ -49,12 +51,14 @@ router.get('/api/music', function(req, res) {
 router.post('/api/music', function(req, res) {
   debug('POST /api/music');
   console.log(req.body);
-  try {
+  try { // instantiate new object, assign to music, pass schema name and object.
     let music = new LiveShow(req.body.artist, req.body.album, req.body.song);
-    storage.createItem('music', music);
+    storage.createItem('music', music); // see promise in storage.js
+    // .then(newToy => {next 3 lines of code go here})
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.write(JSON.stringify(music));
     res.end();
+    // then/catch is waiting for promise to resolve/reject. try/catch will immediately execute.
   } catch(e) {
     console.error(e);
     res.writeHead(400, {'Content-Type': 'text/plain'});

@@ -7,6 +7,7 @@ const uuid = require('uuid/v4');
 // http POST :3000/api/music artist=“Lala” album=”GetReal” song=“MakeBelieve”
 module.exports = function(artist, album, song) {
   if(!artist || !album) throw new Error('Invalid arguments');
+  // Hazard property will be true. In this case of song.
   this.artist = artist; // was >> name
   this.album = album; // was >> type
   this.song = song; // was >> hazard
