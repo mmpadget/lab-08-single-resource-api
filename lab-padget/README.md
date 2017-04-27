@@ -16,9 +16,11 @@
 ## Installation
 Please visit the following pages for how to install your project locally.
 
-[Cloning A Repository](https://help.github.com/articles/cloning-a-repository/)
-[Fork A Repo](https://help.github.com/articles/fork-a-repo/)
-[Forking](https://guides.github.com/activities/forking/)
+* [Cloning A Repository](https://help.github.com/articles/cloning-a-repository/)
+* [Fork A Repo](https://help.github.com/articles/fork-a-repo/)
+* [Forking](https://guides.github.com/activities/forking/)
+
+In [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) (Terminal)
 
 ```npm init
 npm install -D debug
@@ -27,14 +29,17 @@ npm install -D mocha chai chai-http
 ```
 
 To use `npm run watch`
+
 * Open package.json
 * Add "watch": "nodemon server.js"
 
 ## Running the Tests
-In [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) (Terminal on a Mac)
-	npm run test
-	DEBUG=http* nodemon server.js
-	http POST :3000/api/note name=get+chocolate date=“04-26-2017”
+In [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) (Terminal)
+
+```npm run test
+DEBUG=http* nodemon server.js
+http POST :3000/api/note name=get+chocolate date=“04-26-2017”
+```
 
 ## Resources
 * [Promises](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
