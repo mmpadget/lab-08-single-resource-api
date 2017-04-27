@@ -7,11 +7,10 @@
 * We created a url parser that uses node url and querystring modules for the request url.
 * We created a router constructor that manages requests to GET, POST, PUT, and DELETE.
 * We created a storage module that stores resources by their type and id.
-* [Class 8](https://github.com/codefellows/seattle-javascript-401d15/tree/master/class-08-vanilla-REST-api)
-* [Lab 8](https://github.com/codefellows-seattle-javascript-401d15/lab-08-single-resource-api)
+* For more information see: [class 8](https://github.com/codefellows/seattle-javascript-401d15/tree/master/class-08-vanilla-REST-api) and [lab 8](https://github.com/codefellows-seattle-javascript-401d15/lab-08-single-resource-api).
 
-## Prerequisites
-* Node
+## Version
+* 0.1.0
 
 ## Installation
 Please visit the following pages for how to install your project locally.
@@ -22,16 +21,35 @@ Please visit the following pages for how to install your project locally.
 
 In [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) (Terminal)
 
+### NPM Packages
+* [NPM Docs](https://docs.npmjs.com)
+* [NPM package.json](https://docs.npmjs.com/files/package.json)
+
 ```npm init
 npm install -D debug
 npm install -S uuid
 npm install -D mocha chai chai-http
 ```
+### Dependencies
+The result of installation above.
+
+```"devDependencies": {
+  "chai": "^3.5.0",
+  "chai-http": "^3.0.0",
+  "debug": "^2.6.4",
+  "mocha": "^3.3.0"
+},
+"dependencies": {
+  "uuid": "^3.0.1"
+}
+```
+
+### Optional Helper
 
 To use `npm run watch`
 
 * Open package.json
-* Add "watch": "nodemon server.js"
+* In the "scripts" section, add "watch": "nodemon server.js"
 
 ## Running the Tests
 In [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) (Terminal)
@@ -51,7 +69,7 @@ http POST :3000/api/note name=get+chocolate date=“04-26-2017”
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/mmpadget/lab-08-single-resource-api/blob/lab-08/lab-padget/LICENSE) file for details
 
 ## Acknowledgments
 * Code Fellows
