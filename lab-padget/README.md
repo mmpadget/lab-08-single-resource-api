@@ -16,14 +16,15 @@
 ## Installation
 Please visit the following pages for how to install your project locally.
 
-- [Cloning A Repository](https://help.github.com/articles/cloning-a-repository/)
-- [Fork A Repo](https://help.github.com/articles/fork-a-repo/)
-- [Forking](https://guides.github.com/activities/forking/)
+[Cloning A Repository](https://help.github.com/articles/cloning-a-repository/)
+[Fork A Repo](https://help.github.com/articles/fork-a-repo/)
+[Forking](https://guides.github.com/activities/forking/)
 
-	npm init
-	npm install -D debug
-	npm install -S uuid
-	npm install -D mocha chai chai-http
+```npm init
+npm install -D debug
+npm install -S uuid
+npm install -D mocha chai chai-http
+```
 
 To use `npm run watch`
 * Open package.json
