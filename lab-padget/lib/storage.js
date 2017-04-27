@@ -50,3 +50,35 @@ exports.fetchItem = function(schema, id) {
     resolve(item);
   });
 };
+
+exports.putItem = function(schema, item, artist, album, song) {
+  debug('#putItem');
+
+  if(!schema) return Promise.reject(new Error('schema required'));
+  if(!item) return Promise.reject(new Error('item required'));
+  if(!storage[schema]) storage[schema] = {};
+
+  storage[schema][item.id] = item;
+  if(artist) item.artist = artist;
+  if(album) item.album = album;
+  if(song) item.song = song;
+  return Promise.resolve(item);
+};
+
+exports.deleteItem = function(schema, id) {
+  debug('#deleteItem');
+
+  return new Promise((resolve, reject) => {
+    if(!schema) return reject(new Error('schema required'));
+    if(!id) return reject(new Error('id required'));
+
+    let schemaName = storage[schema];
+    if(!schemaName) return reject(new Error('schema not found'));
+
+    let item = schemaName[id];
+    if(!item) return reject(new Error('item not found'));
+
+    delete(schemaName[id]); // delete object
+    resolve(item); // or nothing
+  });
+};

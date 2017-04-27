@@ -63,8 +63,53 @@ router.post('/api/music', function(req, res) {
   }
 });
 
+router.put('/api/music', function(req, res) {
+  debug('PUT /api/music');
+  // let music = LiveShow(req.body.artist, req.body.album, req.body.song);
+  if(req.url.query.id) {
+    storage.putItem('music', req.url.query.id) // grab the object
+    .then(music => {
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.write(JSON.parse(music));
+      res.end();
+    })
+    .catch(err => {
+      console.error(err);
+      res.writeHead(404, {'Content-Type': 'text/plain'});
+      res.write('not found');
+      res.end();
+    });
+    return;
+  }
+
+  res.writeHead(400, {'Content-Type': 'text/plain'});
+  res.write('bad request');
+  res.end();
+});
+
 // TODO: DELETE request pass an ?id=<uuid> in the query string to delete a specific resource should return 204 status with no content in the body.
-// delete is basically the same as GET with "delete"
+router.delete('/api/music', function(req, res) {
+  debug('DELETE /api/music');
+  if(req.url.query.id) {
+    storage.deleteItem('music', req.url.query.id)
+    .then(() => {
+      res.writeHead(204, {'Content-Type': 'application/json'});
+      res.write('delete successful');
+      res.end();
+    })
+    .catch(err => {
+      console.error(err);
+      res.writeHead(404, {'Content-Type': 'text/plain'});
+      res.write('not found');
+      res.end();
+    });
+    return;
+  }
+
+  res.writeHead(400, {'Content-Type': 'text/plain'});
+  res.write('bad request');
+  res.end();
+});
 
 // TODO: Server End Points /api/simple-resource-name
 
