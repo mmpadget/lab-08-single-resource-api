@@ -63,14 +63,15 @@ router.post('/api/music', function(req, res) {
   }
 });
 
+// TODO: pass data as stringified json in the body of a put request to update a resource.
 router.put('/api/music', function(req, res) {
   debug('PUT /api/music');
   // let music = LiveShow(req.body.artist, req.body.album, req.body.song);
-  if(req.url.query.id) {
-    storage.putItem('music', req.url.query.id) // grab the object
+  if(req.body) {
+    storage.putItem('music', req.body) // grab the object with the properties
     .then(music => {
       res.writeHead(200, {'Content-Type': 'application/json'});
-      res.write(JSON.parse(music));
+      res.write(JSON.stringify(music));
       res.end();
     })
     .catch(err => {
