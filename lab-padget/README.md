@@ -10,7 +10,7 @@
 * For more information see: [class 8](https://github.com/codefellows/seattle-javascript-401d15/tree/master/class-08-vanilla-REST-api) and [lab 8](https://github.com/codefellows-seattle-javascript-401d15/lab-08-single-resource-api).
 
 ## Version
-* 0.1.0
+* 0.2.0
 
 ## Installation
 Please visit the following pages for how to install your project locally.
@@ -25,7 +25,8 @@ In [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) (Terminal)
 * [NPM Docs](https://docs.npmjs.com)
 * [NPM package.json](https://docs.npmjs.com/files/package.json)
 
-```npm init
+```npm install
+npm init
 npm install -D debug
 npm install -S uuid
 npm install -D mocha chai chai-http
@@ -33,7 +34,8 @@ npm install -D mocha chai chai-http
 ### Dependencies
 The result of installation above.
 
-```"devDependencies": {
+```npm result
+"devDependencies": {
   "chai": "^3.5.0",
   "chai-http": "^3.0.0",
   "debug": "^2.6.4",
@@ -54,9 +56,18 @@ To use `npm run watch`
 ## Running the Tests
 In [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) (Terminal)
 
-```npm run test
+```testing
+npm run test
 DEBUG=http* nodemon server.js
-http POST :3000/api/note name=get+chocolate date=“04-26-2017”
+
+http POST :3000/api/music artist=“Lala” album=”GetReal” song=“MakeBelieve”
+
+http GET :3000/api/music?id=Id-Goes-Here
+// http GET :3000/api/music?id=9f5515aa-4061-4d65-82ef-5cc9567a8b83
+
+http PUT :3000/api/music artist=“ForReal” album=”MoreBeta” song=“Nutz” id=Id-Goes-Here
+
+http DELETE :3000/api/music?id=Id-Goes-Here
 ```
 
 ## Resources
