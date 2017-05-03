@@ -15,10 +15,10 @@ describe('Server module', function() {
 
   describe('POST method', function() {
     describe('/api/music route', function() {
-      it('should respond with a 200 response', done => {
+      it('should respond with a 200 "ok" response', done => {
         chai.request(server)
         .post('/api/music')
-        .send({artist: 'killers', album: 'born', song: 'whoha'})
+        .send({artist: 'Lala', album: 'GetReal', song: 'MakeBelieve'})
         .end(function(err, res) {
           if(err) console.error(err);
           expect(res.status).to.equal(200);
@@ -33,7 +33,7 @@ describe('Server module', function() {
     before(done => {
       chai.request(server)
       .post('/api/music')
-      .send({artist: 'killers', album: 'born', song: 'whoha'})
+      .send({artist: 'Lala', album: 'GetReal', song: 'MakeBelieve'})
       .end((err, res) => {
         // console.log(res);
         storage = JSON.parse(res.text);
@@ -61,7 +61,7 @@ describe('Server module', function() {
       });
     });
     describe('improperly formatted request', function() {
-      it('should return an error response 400', done => {
+      it('should return an error response 400 "bad request"', done => {
         chai.request(server)
         .get(`/api/music?foobar=${storage.id}`)
         .end((err, res) => {
@@ -72,7 +72,7 @@ describe('Server module', function() {
     });
   });
   describe('unregistered route', function() {
-    it('should respond with a 404 for id not found', done => {
+    it('should respond with a 404 "id not found"', done => {
       chai.request(server)
       .get('/api/music?id=watwhat')
       .end((err, res) => {
@@ -87,7 +87,7 @@ describe('Server module', function() {
       before(done => {
         chai.request(server)
         .post('/api/music')
-        .send({artist: 'killers', album: 'born', song: 'whoha'})
+        .send({artist: 'ForReal', album: 'MoreBeta', song: 'Nutz'})
         .end((err, res) => {
           storage = JSON.parse(res.text);
           done();
@@ -110,7 +110,7 @@ describe('Server module', function() {
       before(done => {
         chai.request(server)
         .post('api/music')
-        .send({artist: 'killers', album: 'born', song: 'whoha'})
+        .send({artist: 'Lala', album: 'GetReal', song: 'MakeBelieve'})
         .end((err, res) => {
           storage = JSON.parse(res.text);
           done();
@@ -121,7 +121,6 @@ describe('Server module', function() {
         .delete('/api/music')
         .query({id: storage.id})
         .end(() => {
-          // console.error();
           done();
         });
       });
