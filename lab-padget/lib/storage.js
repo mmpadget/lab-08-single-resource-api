@@ -52,16 +52,6 @@ exports.putItem = function(schema, id, liveShow) {
   });
 };
 
-  // WORKS! but overwrites the object. not what we want.
-  // if(!storage[schema]) storage[schema] = {};
-
-  // WORKS!
-  // storage[schema][item.id] = item;
-  // if(artist) item.artist = artist;
-  // if(album) item.album = album;
-  // if(song) item.song = song;
-  // return(item);
-
 exports.deleteItem = function(schema, id) {
   debug('#deleteItem');
 
