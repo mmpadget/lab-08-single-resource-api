@@ -67,24 +67,47 @@ exports.fetchItem = function(schema, id) {
   });
 };
 
-exports.putItem = function(schema, item, artist, album, song) {
+exports.putItem = function(schema, id, liveShow) {
   debug('#putItem');
-
   if(!schema) return Promise.reject(new Error('schema required'));
-  if(!item) return Promise.reject(new Error('item required'));
+  if(!id) return Promise.reject(new Error('item required'));
 
-  if(!storage[schema]) storage[schema] = {}; // overwrites the object. not what we want.
+  let schemaName = storage[schema];
+  if(!schemaName) return Promise.reject(new Error('schema not found'));
 
+  let item = schemaName[id];
+  if(!item) return Promise.reject(new Error('item not found'));
+  if(liveShow.artist) item.artist = liveShow.artist;
+  if(liveShow.album) item.album = liveShow.album;
+  if(liveShow.song) item.song = liveShow.song;
+  Promise.resolve(item);
+
+  // WORKS! but overwrites the object. not what we want.
+  // if(!storage[schema]) storage[schema] = {};
+
+  // WORKS!
+  // storage[schema][item.id] = item;
+  // if(artist) item.artist = artist;
+  // if(album) item.album = album;
+  // if(song) item.song = song;
+  // return(item);
+
+  // NOPE...
   // store[schemaName][item.id] = item; // recommended
   // let schema = storage[schemaName]; // recommended
+  // let schemaName = storage[schema]; // example from deleteItem below
 
-  // let schemaName = storage[schema]; // example from deleteItem
-
-  storage[schema][item.id] = item;
-  if(artist) item.artist = artist;
-  if(album) item.album = album;
-  if(song) item.song = song;
-  return(item);
+  // IN PROGRESS...
+  // let schemaName = storage[schema]; // schema name exists.
+  // if(!schemaName) return reject(new Error('schema not found'));
+  //
+  // let item = schemaName[id]; // assign to item.
+  // if(!item) return reject(new Error('item not found'));
+  //
+  // if(artist) item.artist = artist; // item.name = car.name;
+  // if(album) item.album = album;
+  // if(song) item.song = song;
+  // return(car);
 };
 
 exports.deleteItem = function(schema, id) {

@@ -70,26 +70,39 @@ router.post('/api/music', function(req, res) {
 // TODO: pass data as stringified json in the body of a put request to update a resource.
 router.put('/api/music', function(req, res) {
   debug('PUT /api/music');
-  // let music = LiveShow(req.body.artist, req.body.album, req.body.song);
-  if(req.body) {
-    storage.putItem('music', req.body) // grab the object with the properties
-    .then(music => {
-      res.writeHead(200, {'Content-Type': 'application/json'});
-      res.write(JSON.stringify(music));
-      res.end();
-    })
-    .catch(err => {
-      console.error(err);
-      res.writeHead(404, {'Content-Type': 'text/plain'});
-      res.write('not found');
-      res.end();
-    });
-    return;
-  }
+  storage.putItem('music', req.body.id, req.body) // grab the object with the properties
+  .then(music => {
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.write(JSON.stringify(music));
+    res.end();
+  })
+  .catch(err => {
+    console.error(err);
+    res.writeHead(404, {'Content-Type': 'text/plain'});
+    res.write('not found');
+    res.end();
+  });
+  return;
 
-  res.writeHead(400, {'Content-Type': 'text/plain'});
-  res.write('bad request');
-  res.end();
+  // let music = LiveShow(req.body.artist, req.body.album, req.body.song);
+  // if(req.body) {
+  //   storage.putItem('music', req.body) // grab the object with the properties
+  //   .then(music => {
+  //     res.writeHead(200, {'Content-Type': 'application/json'});
+  //     res.write(JSON.stringify(music));
+  //     res.end();
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //     res.writeHead(404, {'Content-Type': 'text/plain'});
+  //     res.write('not found');
+  //     res.end();
+  //   });
+  //   return;
+  // }
+  // res.writeHead(400, {'Content-Type': 'text/plain'});
+  // res.write('bad request');
+  // res.end();
 });
 
 // TODO: DELETE request pass an ?id=<uuid> in the query string to delete a specific resource should return 204 status with no content in the body.
